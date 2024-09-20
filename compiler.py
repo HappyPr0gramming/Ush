@@ -14,6 +14,7 @@ if '.ush' in choosefile:
 
     with open(choosefile, 'r') as file:
 
+
         lines = file.readlines()
 
         osname = platform.system()
@@ -21,6 +22,9 @@ if '.ush' in choosefile:
         directory = os.getcwd()
         recognised = False
         read = 0
+
+        for x in range(10):
+            print('')
 
         for line in lines:
 
@@ -43,7 +47,7 @@ if '.ush' in choosefile:
                 print(os.listdir())
                 recognised = True
 
-            if command == 'pwd':
+            if 'pwd' in command:
                 print(directory)
                 recognised = True
 
@@ -110,6 +114,10 @@ if '.ush' in choosefile:
                     print('You do not have the necessary permissions to execute that file')
                 recognised = True
 
+            if 'end' in command:
+                for s in range(10):
+                    print('')
+
 
             if recognised == False:
                 print('Command', command, 'is not a recognised system command')
@@ -117,6 +125,7 @@ if '.ush' in choosefile:
             history.append(command)
 
             read += 1
+
 
 else:
     print('Incorrect file type!')
