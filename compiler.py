@@ -1,6 +1,7 @@
 import os
 import sys
 import platform
+import subprocess
 
 osname = platform.system()
 osuser = os.getlogin()
@@ -121,6 +122,18 @@ if '.ush' in choosefile:
 
             if recognised == False:
                 print('Command', command, 'is not a recognised system command')
+
+            if 'pip' in command:
+                recognised = True
+                filename = command.replace('pip', '').strip()
+
+                try:
+                    subprocess.check_call(["pip", "install", f"{filename}"])
+                except:
+                    try:
+                        subprocess.check_call(["pip3", "install", f"{filename}"])
+                    except:
+                        print('ERROR: Could not install: ', filename)
 
             history.append(command)
 
