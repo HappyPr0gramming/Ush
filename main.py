@@ -1,6 +1,7 @@
 import os
 import sys
 import platform
+import subprocess
 
 
 osname = platform.system()
@@ -157,7 +158,21 @@ while True:
 
         with open(file, 'w') as file:
             for line in text:
-                file.write(line + '\n')        
+                file.write(line + '\n')     
+
+    if 'pip' in command:
+        recognised = True
+        filename = command.replace('pip', '').strip()
+
+        try:
+            subprocess.check_call(["pip", "install", f"{filename}"])
+        except:
+            try:
+                subprocess.check_call(["pip3", "install", f"{filename}"])
+            except:
+                print('ERROR: Could not install: ', filename)
+     
+
 
 
 
